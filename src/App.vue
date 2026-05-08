@@ -10,7 +10,10 @@
     />
 
     <template v-else>
-      <ScoreBoard :players="players" :draws="draws" />
+      <ScoreBoard
+        :players="players"
+        :draws="draws"
+      />
 
       <div
         class="turn-indicator"
@@ -20,10 +23,16 @@
           Turno de <strong>{{ currentPlayerName }}</strong>
           <span class="symbol">({{ currentPlayer }})</span>
         </span>
-        <span v-else-if="winner" class="winner-message">
+        <span
+          v-else-if="winner"
+          class="winner-message"
+        >
           🏆 ¡Gana {{ winnerName }}!
         </span>
-        <span v-else class="draw-message">
+        <span
+          v-else
+          class="draw-message"
+        >
           🤝 ¡Empate!
         </span>
       </div>
@@ -40,10 +49,16 @@
       </div>
 
       <div class="actions">
-        <button class="btn btn-primary" @click="newGame">
+        <button
+          class="btn btn-primary"
+          @click="newGame"
+        >
           Nueva Partida
         </button>
-        <button class="btn btn-secondary" @click="resetAll">
+        <button
+          class="btn btn-secondary"
+          @click="resetAll"
+        >
           Reiniciar Todo
         </button>
       </div>

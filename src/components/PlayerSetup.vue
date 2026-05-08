@@ -11,7 +11,7 @@
           placeholder="Nombre del Jugador X"
           maxlength="20"
           @keyup.enter="submit"
-        />
+        >
       </div>
       <div class="input-group">
         <label for="p2">Jugador O</label>
@@ -22,7 +22,7 @@
           placeholder="Nombre del Jugador O"
           maxlength="20"
           @keyup.enter="submit"
-        />
+        >
       </div>
       <button
         class="btn btn-primary"

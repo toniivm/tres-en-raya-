@@ -5,7 +5,10 @@
     :disabled="disabled"
     @click="emit('click')"
   >
-    <span v-if="value" class="cell-value">{{ value }}</span>
+    <span
+      v-if="value"
+      class="cell-value"
+    >{{ value }}</span>
   </button>
 </template>
 
