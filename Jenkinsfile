@@ -1,12 +1,10 @@
 pipeline {
     agent any
 
-    tools {
-        nodejs 'NodeJS'
-    }
-
     environment {
         FIREBASE_TOKEN = credentials('firebase-token')
+        NODE_HOME = 'C:\\Program Files\\nodejs'
+        PATH = "C:\\Program Files\\nodejs;${env.PATH}"
     }
 
     stages {
@@ -18,41 +16,31 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                dir('tres-en-raya') {
-                    bat 'npm ci'
-                }
+                bat 'npm ci'
             }
         }
 
         stage('Lint') {
             steps {
-                dir('tres-en-raya') {
-                    bat 'npm run lint'
-                }
+                bat 'npm run lint'
             }
         }
 
         stage('Test') {
             steps {
-                dir('tres-en-raya') {
-                    bat 'npm test'
-                }
+                bat 'npm test'
             }
         }
 
         stage('Build') {
             steps {
-                dir('tres-en-raya') {
-                    bat 'npm run build'
-                }
+                bat 'npm run build'
             }
         }
 
         stage('Deploy to Firebase') {
             steps {
-                dir('tres-en-raya') {
-                    bat "npx firebase-tools deploy --token %FIREBASE_TOKEN% --only hosting --non-interactive"
-                }
+                bat "npx firebase-tools deploy --token %FIREBASE_TOKEN% --only hosting --non-interactive"
             }
         }
     }
