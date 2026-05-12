@@ -73,15 +73,17 @@ import ScoreBoard from './components/ScoreBoard.vue'
 import GameBoard from './components/GameBoard.vue'
 import { checkWinner, isBoardFull } from './gameLogic.js'
 
+// Estado general de la partida
 const gameStarted = ref(false)
-const board = ref(Array(9).fill(null))
-const currentPlayer = ref('X')
+const board = ref(Array(9).fill(null))  // tablero 3x3 como array de 9 celdas
+const currentPlayer = ref('X')          // siempre empieza X
 const winner = ref(null)
 const winningCells = ref([])
 const isDraw = ref(false)
 const draws = ref(0)
 const moveCount = ref(0)
 
+// Datos de los dos jugadores con su marcador acumulado
 const players = ref([
   { name: 'Jugador 1', symbol: 'X', wins: 0 },
   { name: 'Jugador 2', symbol: 'O', wins: 0 }
@@ -96,6 +98,7 @@ const winnerName = computed(() =>
 )
 
 function handleCellClick (index) {
+  // Ignorar click si la celda está ocupada o si la partida ya terminó
   if (board.value[index] || winner.value || isDraw.value) return
 
   const newBoard = [...board.value]
@@ -103,6 +106,7 @@ function handleCellClick (index) {
   board.value = newBoard
   moveCount.value++
 
+  // Ver si este movimiento gana la partida
   const result = checkWinner(board.value)
   if (result) {
     winner.value = result.winner
@@ -111,12 +115,14 @@ function handleCellClick (index) {
     return
   }
 
+  // Si el tablero está lleno sin ganador, es empate
   if (isBoardFull(board.value)) {
     isDraw.value = true
     draws.value++
     return
   }
 
+  // Cambiar turno al otro jugador
   currentPlayer.value = currentPlayer.value === 'X' ? 'O' : 'X'
 }
 

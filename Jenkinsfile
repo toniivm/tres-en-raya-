@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    triggers {
+        githubPush()               // disparo inmediato via webhook de GitHub
+        pollSCM('H/5 * * * *')    // fallback: comprueba cambios cada 5 minutos
+    }
+
     environment {
         FIREBASE_TOKEN = credentials('firebase-token')
         NODE_HOME = 'C:\\Program Files\\nodejs'
